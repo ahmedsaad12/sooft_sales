@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="lang"
+            type="String" />
+
+        <variable
+            name="model"
+            type="com.sooft_sales.model.AddProductModel" />
+
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities_fragments.activity_add_Product.fragments.Fragment_AddProductStep1">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nested"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/gray0"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <EditText
+                        android:id="@+id/edtSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/linear_shape"
+                        android:hint="@string/invoice_number"
+                        android:imeOptions="actionSearch"
+                        android:inputType="numberDecimal"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="13dp"
+                        tools:ignore="RtlCompat" />
+
+                    <TextView
+                        android:id="@+id/tvInvoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                       android:textSize="14sp"/>
+
+
+                    <Button
+                        android:id="@+id/nextBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/btn_shape"
+                        android:paddingLeft="50dp"
+                        android:visibility="gone"
+                        android:paddingTop="10dp"
+                        android:paddingRight="50dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/return_invoices"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+
+
+    </FrameLayout>
+</layout>

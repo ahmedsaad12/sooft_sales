@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">مبيعات سوفت</string>
+    <string name="field_required">حقل مطلوب</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="username">اسم االمستخدم</string>
+    <string name="chooseLanguage">اختر اللغة</string>
+    <string name="password">كلمة المرور</string>
+    <string name="rememberme">تذكرنى</string>
+    <string name="sales_invoices">فواتير المبيعات</string>
+    <string name="return_invoices">إرجاع الفواتير</string>
+    <string name="discout">خصم</string>
+    <string name="item">العنصر</string>
+    <string name="amount">الكمية</string>
+    <string name="price">المبلغ</string>
+    <string name="total">الإجمالي</string>
+    <string name="total_befor_tax">المبلغ قبل الخصم :</string>
+    <string name="total_after_tax">المبلغ  قبل الضريبة وبعد الخصم:</string>
+    <string name="total_after_discount">الإجمالى بعد الضريبه وبعد الخصم:</string>
+    <string name="total1">الإجمالي</string>
+    <string name="save">حفظ</string>
+    <string name="add">إضافة</string>
+    <string name="wait">انتظر</string>
+    <string name="english_title">الاسم بالانجليزى</string>
+    <string name="arabic_title">الاسم بالعربى</string>
+    <string name="gallery">الصور</string>
+    <string name="camera">الكاميرا</string>
+    <string name="cancel">الغاء</string>
+    <string name="ch_cat">اختر الفسم</string>
+    <string name="perm_image_denied">لا يمكنك الوصول للصور</string>
+    <string name="tax">ضريبه</string>
+    <string name="tax2">ضريبه : </string>
+    <string name="discount2">خصم : </string>
+    <string name="suc">تم بنجاح</string>
+    <string name="customer">عميل</string>
+    <string name="invoice">فاتوره : </string>
+    <string name="date_time">تاريخ/وقت : </string>
+    <string name="client_name">اسم العميل : </string>
+    <string name="total2">الاجمالى : </string>
+    <string name="print">طباعه</string>
+    <string name="r">ر.س</string>
+    <string name="invoice_number">رقم الفاتوره</string>
+    <string name="renew_data">تحديث</string>
+    <string name="incorrect">مستخدم او كلمة مرور خطا</string>
+    <string name="logout">خروج</string>
+    <string name="vat_no">الرقم الضريبي :</string>
+    <string name="registration_no">رقم التسجيل :</string>
+    <string name="company">شركة :</string>
+    <string name="delete">حذف</string>
+    <string name="ch_imge">اختر الصوره</string>
+    <string name="per">لا يوجد لديك صلاحيه</string>
+    <string name="before">تم ارجاع هذه الفاتوره من قبل</string>
+    <string name="ch_name">تم اضافة هذا المنتج من قبل</string>
+
+    <string-array name="langs">
+        <item>العربية</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="customer">
+
+        <item>العميل 1</item>
+        <item>العميل 2</item>
+    </string-array>
+
+    <string name="toast_1">Transaction print,use the AIDL mode!</string>
+    <string name="toast_2">The service has been disconnected!</string>
+    <string name="toast_3">Bluetooth device is unavailable</string>
+    <string name="toast_4">Bluetooth device not detected. Please open Bluetooth!</string>
+    <string name="toast_5">Not Found InnterPrinter!</string>
+    <string name="toast_6">Bluetooth connect failed!</string>
+    <string name="toast_7"> Only a single Qr code is printed for the AIDL mode</string>
+    <string name="toast_8">Now QrCode size must be less than 7!</string>
+    <string name="toast_9">BarCode type or conent error!</string>
+    <string name="toast_10">Please set the printer as black label mode!</string>
+    <string name="toast_11">Settings->System->Advanced->InnerPrinter-> set black mark function</string>
+    <string name="toast_12">Please set the printer to label mode!</string>
+    <string name="align_form">Align form</string>
+    <string name="align_left">Align left</string>
+    <string name="align_mid">middle</string>
+    <string name="align_right">right</string>
+    <string name="pic_pos">Picture position</string>
+    <string name="pic_hor">transverse</string>
+    <string name="pic_ver">vertical</string>
+
+    <string name="pic_mode">picture printing method</string>
+    <string name="pic_mode1">raster bitmap</string>
+    <string name="pic_mode2">8 point single density</string>
+    <string name="pic_mode3">8 point double density</string>
+    <string name="pic_mode4">24 point single density</string>
+    <string name="pic_mode5">24 point double density</string>
+    <string name="simplified">فاتورة ضريبة مبسطة</string>
+    <string name="time">الوقت : </string>
+    <string name="date">التاريخ : </string>
+    <string name="tax3">ضريبة القيمه المضافه </string>
+    <string name="total_tax">المجموع شامل الضريبه</string>
+    <string name="paied">المدفوع</string>
+    <string name="pay_type">نوع الدفع</string>
+    <string name="cash">نقدي</string>
+    <string name="mada">مدى</string>
+    <string name="payment_type2">نوع الدفع : </string>
+    <string name="ch_payment">اختر نوع الدفع </string>
+    <string name="total_after_discount1">الاجمالى بعد الخصم</string>
+    <string name="subscribtion_ended">الاشتراك منتهى</string>
+    <string name="cant_login">لا يمكنك تسجيل الدخول </string>
+    <string name="tax4">مبلغ الضريبه</string>
+    <string name="url">رابط التطبيق</string>
+    <string name="invaild_url">رابط خاطئ</string>
+</resources>

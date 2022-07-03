@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.sooft_sales.model.LoginModel" />
+        <variable
+
+            name="lang"
+            type="String" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="@color/gray3"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:textSize="35sp"
+                android:textColor="@color/green"
+                android:textAllCaps="false"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="90dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/linear_shape"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_empty_user"
+
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    app:counterEnabled="false"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false">
+
+                    <EditText
+                        android:id="@+id/edUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:gravity="start|center_vertical"
+                        android:hint="@string/username"
+                        android:lines="1"
+                        android:text="@={model.username}"
+                        error="@{model.error_user_name}"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20sp"
+                android:background="@drawable/linear_shape"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:rotation='@{lang.equals("ar")?180:0}'
+                    android:src="@drawable/ic_password"
+
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    app:counterEnabled="false"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/edPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:gravity="start|center_vertical"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        error="@{model.error_password}"
+                        android:text="@={model.password}"
+
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20sp"
+                android:background="@drawable/linear_shape"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                app:counterEnabled="false"
+                app:endIconMode="clear_text"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:errorEnabled="false"
+                app:hintEnabled="false">
+
+                <EditText
+                    android:id="@+id/edtUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    android:gravity="start|center_vertical"
+                    android:hint="@string/url"
+                    android:lines="1"
+                    android:text="@={model.url}"
+                    error="@{model.error_url}"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_lang"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/linear_shape"
+                    android:backgroundTint="@color/green2"
+                    tools:targetApi="lollipop">
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:entries="@array/langs"
+                        android:layout_weight="1"
+                        android:spinnerMode="dropdown"/>
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+<!--            <CheckBox-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/rememberme"-->
+<!--                android:layout_marginStart="35sp"-->
+<!--                android:layout_marginTop="18sp"-->
+<!--                android:alpha=".7"-->
+<!--                android:buttonTint="@color/green"-->
+<!--                android:textSize="15sp"/>-->
+            <Button
+                android:id="@+id/btLogin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/btn_shape"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textSize="22sp"
+                android:layout_marginTop="30dp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

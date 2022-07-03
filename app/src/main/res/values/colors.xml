@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3AB54A</color>
+    <color name="colorPrimaryDark">#3AB54A</color>
+    <color name="colorAccent">#3AB54A</color>
+    <color name="color1">#FCF3D6</color>
+    <color name="color2">#EAB217</color>
+    <color name="color3">#F7F7F7</color>
+    <color name="color4">#F1EBD8</color>
+    <color name="color5">#FF5200</color>
+    <color name="color6">#EC6535</color>
+    <color name="color7">#FFEADB</color>
+    <color name="color8">#23242E</color>
+    <color name="color9">#4C4C4C</color>
+    <color name="color10">#3f3d56</color>
+    <color name="color11">#111219</color>
+
+    <color name="gray0">#99fafafa</color>
+    <color name="gray1">#707070</color>
+    <color name="gray2">#7D7D7D</color>
+    <color name="gray3">#EFEFEF</color>
+    <color name="gray4">#6D6D6D</color>
+    <color name="gray5">#29000000</color>
+    <color name="gray6">#b0afbb</color>
+    <color name="gray7">#a0a0a0</color>
+    <color name="gray8">#707070</color>
+    <color name="gray9">#757575</color>
+    <color name="gray10">#939393</color>
+    <color name="gray11">#8B8B8B</color>
+    <color name="gray12">#C5C5C5</color>
+    <color name="gray13">#EAEAEA</color>
+    <color name="gray14">#949494</color>
+    <color name="gray15">#C6C6C6</color>
+    <color name="gray16">#F1F1F1</color>
+
+    <color name="white">#fff</color>
+    <color name="black">#000000</color>
+    <color name="black1">#222020</color>
+    <color name="black2">#242424</color>
+    <color name="black3">#E5E8EC</color>
+
+    <color name="color_red">#C00B1E</color>
+
+    <color name="green">#4CAF50</color>
+    <color name="green1">#98D64F</color>
+    <color name="green2">#CAE4AC</color>
+
+    <color name="black_trans">#55000000</color>
+    <color name="transparent">#00000000</color>
+
+
+</resources>

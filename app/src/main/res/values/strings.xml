@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">SoofT SaleS</string>
+    <string name="field_required">field required</string>
+    <string name="login">Login</string>
+    <string name="username">userName</string>
+    <string name="chooseLanguage">choose Language</string>
+    <string name="password">Password</string>
+    <string name="rememberme">Remember me</string>
+    <string name="sales_invoices">sales invoices</string>
+    <string name="return_invoices">Return invoices</string>
+    <string name="discout">Discout</string>
+    <string name="item">Item</string>
+    <string name="amount">Amount</string>
+    <string name="price">Price</string>
+    <string name="total">Total</string>
+    <string name="total_befor_tax">Total Befor Discount :</string>
+    <string name="total_after_tax">Total Before Tax And After Discount:</string>
+    <string name="total_after_discount">Total After Tax And After Discount :</string>
+    <string name="total1">Total Item :</string>
+    <string name="save">Save</string>
+    <string name="add">Add</string>
+    <string name="wait">Wait</string>
+    <string name="english_title">English Title</string>
+    <string name="arabic_title">Arabic Title</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="cancel">Cancel</string>
+    <string name="ch_cat">Choose Category</string>
+    <string name="perm_image_denied">Permission image denied</string>
+    <string name="tax">Tax</string>
+    <string name="tax2">Tax : </string>
+    <string name="discount2"> Discount :</string>
+    <string name="suc">Succes</string>
+    <string name="customer">Customer</string>
+    <string name="invoice">Invoice :</string>
+    <string name="date_time">Date/Time:</string>
+    <string name="client_name">Client Name :</string>
+    <string name="total2">"Total : "</string>
+    <string name="print">Print</string>
+    <string name="r">R.S</string>
+    <string name="invoice_number">Invoice Number</string>
+    <string name="renew_data">Renew Data</string>
+    <string name="incorrect">Incorrect User Or Password</string>
+    <string name="logout">Logout</string>
+    <string name="vat_no">VAT No :</string>
+    <string name="registration_no">Registration No :</string>
+    <string name="company">Company :</string>
+    <string name="delete">delete</string>
+    <string name="ch_imge">Choose Image</string>
+    <string name="per">"Dont Have Permission "</string>
+    <string name="before">this invoice return before</string>
+    <string name="ch_name">Change Name</string>
+
+    <string-array name="langs">
+        <item>عربى</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="customer">
+
+        <item>customer1</item>
+        <item>customer2</item>
+    </string-array>
+
+
+    <string name="toast_1">Transaction print,use the AIDL mode!</string>
+    <string name="toast_2">The service has been disconnected!</string>
+    <string name="toast_3">Bluetooth device is unavailable</string>
+    <string name="toast_4">Bluetooth device not detected. Please open Bluetooth!</string>
+    <string name="toast_5">Not Found InnterPrinter!</string>
+    <string name="toast_6">Bluetooth connect failed!</string>
+    <string name="toast_7"> Only a single Qr code is printed for the AIDL mode</string>
+    <string name="toast_8">Now QrCode size must be less than 7!</string>
+    <string name="toast_9">BarCode type or conent error!</string>
+    <string name="toast_10">Please set the printer as black label mode!</string>
+    <string name="toast_11">Settings->System->Advanced->InnerPrinter-> set black mark function</string>
+    <string name="toast_12">Please set the printer to label mode!</string>
+    <string name="align_form">Align form</string>
+    <string name="align_left">Align left</string>
+    <string name="align_mid">middle</string>
+    <string name="align_right">right</string>
+    <string name="pic_pos">Picture position</string>
+    <string name="pic_hor">transverse</string>
+    <string name="pic_ver">vertical</string>
+
+    <string name="pic_mode">picture printing method</string>
+    <string name="pic_mode1">raster bitmap</string>
+    <string name="pic_mode2">8 point single density</string>
+    <string name="pic_mode3">8 point double density</string>
+    <string name="pic_mode4">24 point single density</string>
+    <string name="pic_mode5">24 point double density</string>
+    <string name="simplified">Simplified Tax Invoice</string>
+    <string name="time">Time : </string>
+    <string name="date">Date : </string>
+    <string name="tax3">Tax</string>
+    <string name="total_tax">Total With Tax</string>
+    <string name="paied">Payed</string>
+    <string name="pay_type">Payment Type</string>
+    <string name="cash">Cash </string>
+    <string name="mada">Mada</string>
+    <string name="payment_type2">Payment Type : </string>
+    <string name="ch_payment">Choose Payment</string>
+    <string name="total_after_discount1">Total After Discount</string>
+    <string name="subscribtion_ended">Subscribtion Ended</string>
+    <string name="cant_login">You Cant Login</string>
+    <string name="tax4">Tax Price</string>
+    <string name="url">Url</string>
+    <string name="invaild_url">Invaild Url</string>
+</resources>

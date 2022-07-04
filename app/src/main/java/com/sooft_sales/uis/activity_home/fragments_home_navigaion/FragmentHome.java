@@ -601,7 +601,7 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
         pos = 0;
         Toast.makeText(activity, createOrderModels.size() + " " + preferences.getOrdernum(activity), Toast.LENGTH_SHORT).show();
 Log.e("sssdldldl",createOrderModels.size()+"");
-        if (createOrderModels.size() == preferences.getOrdernum(activity)) {
+        if (createOrderModels.size() >= preferences.getOrdernum(activity)) {
 
             Toast.makeText(activity, createOrderModels.size() + "", Toast.LENGTH_SHORT).show();
             if (createOrderModels.size() > 0) {
@@ -610,7 +610,8 @@ Log.e("sssdldldl",createOrderModels.size()+"");
                 this.createOrderModels=createOrderModels;
 
                 try {
-                    accessDatabase.getOrderProduct(this, createOrderModels.get(pos).getId() + "");
+                    uploadOrders();
+         //           accessDatabase.getOrderProduct(this, createOrderModels.get(pos).getId() + "");
 
                 } catch (Exception e) {
 

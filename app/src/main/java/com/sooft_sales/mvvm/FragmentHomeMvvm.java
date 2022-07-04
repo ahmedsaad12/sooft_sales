@@ -290,6 +290,10 @@ public class FragmentHomeMvvm extends AndroidViewModel {
                                 back.postValue(true);
 
                             }
+                            else{
+                                back.postValue(true);
+
+                            }
 
                         }
                     }

@@ -4,9 +4,6 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/742cd75afbf28157203c648bbb017d4d/transformed/jetified-printerlibrary-1.0.13/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/742cd75afbf28157203c648bbb017d4d/transformed/jetified-printerlibrary-1.0.13/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/742cd75afbf28157203c648bbb017d4d/transformed/jetified-printerlibrary-1.0.13/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/742cd75afbf28157203c648bbb017d4d/transformed/jetified-printerlibrary-1.0.13/res" />
-      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/742cd75afbf28157203c648bbb017d4d/transformed/jetified-printerlibrary-1.0.13/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/742cd75afbf28157203c648bbb017d4d/transformed/jetified-printerlibrary-1.0.13/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

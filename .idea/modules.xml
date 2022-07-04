@@ -4,9 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sooft_sales.iml" filepath="$PROJECT_DIR$/.idea/modules/sooft_sales.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/sooft_sales.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/sooft_sales.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/sooft_sales.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/sooft_sales.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/sooft_sales.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/sooft_sales.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/sooft_sales.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/sooft_sales.app.unitTest.iml" />
     </modules>
   </component>
 </project>

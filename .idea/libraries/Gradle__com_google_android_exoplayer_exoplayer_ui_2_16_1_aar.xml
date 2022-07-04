@@ -2,19 +2,15 @@
   <library name="Gradle: com.google.android.exoplayer:exoplayer-ui:2.16.1@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ff81b58694413e6f20d956af7eeda5e9/transformed/jetified-exoplayer-ui-2.16.1/annotations.zip!/" />
-      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/45cb6a6427e6ce04b696cb6a877b6b82/transformed/jetified-exoplayer-ui-2.16.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ff81b58694413e6f20d956af7eeda5e9/transformed/jetified-exoplayer-ui-2.16.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ff81b58694413e6f20d956af7eeda5e9/transformed/jetified-exoplayer-ui-2.16.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ff81b58694413e6f20d956af7eeda5e9/transformed/jetified-exoplayer-ui-2.16.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/45cb6a6427e6ce04b696cb6a877b6b82/transformed/jetified-exoplayer-ui-2.16.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/45cb6a6427e6ce04b696cb6a877b6b82/transformed/jetified-exoplayer-ui-2.16.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/transforms-3/45cb6a6427e6ce04b696cb6a877b6b82/transformed/jetified-exoplayer-ui-2.16.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.0.2-all/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-ui/2.16.1/18261d40c6c283e22f6d2f1f37fa65068836e68/exoplayer-ui-2.16.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-ui/2.16.1/18261d40c6c283e22f6d2f1f37fa65068836e68/exoplayer-ui-2.16.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

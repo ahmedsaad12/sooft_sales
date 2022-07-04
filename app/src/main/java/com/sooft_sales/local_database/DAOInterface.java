@@ -50,7 +50,7 @@ public interface DAOInterface {
 
     @Query("Update " + Tags.table_products + " set  id=:newid where id=:id")
     int updateProduct(double id, double newid);
-    @Query("SELECT * FROM " + Tags.table_order +" where local=:local or is_back =:isback")
+    @Query("SELECT * FROM " + Tags.table_order +" join "+Tags.table_order_products+" where local=:local or is_back =:isback and id=order_id")
     List<CreateOrderModel> getallOrders(boolean local,boolean isback);
     @Query("SELECT * FROM " + Tags.table_order_products + " where order_id=:id   ")
     List<ItemCartModel> getOrderProducts(double id);

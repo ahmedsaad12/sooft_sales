@@ -29,6 +29,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.google.gson.Gson;
 import com.sooft_sales.R;
 
 import com.sooft_sales.databinding.FragmentHomeBinding;
@@ -38,6 +39,7 @@ import com.sooft_sales.local_database.DataBaseInterfaces;
 import com.sooft_sales.model.CreateOrderModel;
 import com.sooft_sales.model.DepartmentModel;
 import com.sooft_sales.model.ItemCartModel;
+import com.sooft_sales.model.OrdersModel;
 import com.sooft_sales.model.ProductModel;
 import com.sooft_sales.model.SettingDataModel;
 import com.sooft_sales.model.SettingModel;
@@ -67,16 +69,18 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class FragmentHome extends BaseFragment implements DataBaseInterfaces.ProductInsertInterface, DataBaseInterfaces.CategoryInsertInterface, DataBaseInterfaces.OrderInsertInterface, DataBaseInterfaces.ProductOrderInsertInterface, DataBaseInterfaces.ProductInterface, DataBaseInterfaces.ProductupdateInterface, DataBaseInterfaces.AllOrderInterface, DataBaseInterfaces.AllOrderProductInterface {
+public class FragmentHome extends BaseFragment implements DataBaseInterfaces.ProductInsertInterface, DataBaseInterfaces.CategoryInsertInterface, DataBaseInterfaces.OrderInsertInterface, DataBaseInterfaces.ProductOrderInsertInterface, DataBaseInterfaces.ProductInterface, DataBaseInterfaces.ProductupdateInterface, DataBaseInterfaces.AllOrderInterface {
     private static final String TAG = FragmentHome.class.getName();
     private HomeActivity activity;
     private FragmentHomeBinding binding;
     private FragmentHomeMvvm fragmentHomeMvvm;
     private AccessDatabase accessDatabase;
-    private int index = 0;
     private CompositeDisposable disposable = new CompositeDisposable();
     private List<ProductModel> productModels;
     private List<CreateOrderModel> createOrderModels;
+    private List<OrdersModel> createOrderModels1;
+    private List<DepartmentModel> departmentModels;
+
     private int pos = 0;
     private Preferences preferences;
     private UserSettingsModel userSettingsModel;
@@ -143,14 +147,11 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
         fragmentHomeMvvm = ViewModelProviders.of(this).get(FragmentHomeMvvm.class);
         fragmentHomeMvvm.onLogoutSuccess().observe(activity, isLogout -> {
             if (isLogout) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
+
                         accessDatabase.clear(activity);
 
 
-                    }
-                }).start();
+
                 preferences.clearcart_soft(activity);
                 preferences.create_update_user_additional_date(activity, null);
                 preferences.clearUserData(activity);
@@ -193,19 +194,15 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
             }
         });
         fragmentHomeMvvm.getCategoryData().observe(activity, new androidx.lifecycle.Observer<List<DepartmentModel>>() {
+
             @Override
             public void onChanged(List<DepartmentModel> departmentModels) {
                 if (departmentModels.size() > 0) {
-                    //Log.e("kkkk", departmentModels.size() + "");
-                    try {
-                        accessDatabase.insertCategory(departmentModels, FragmentHome.this);
-
-                    } catch (Exception e) {
-
-                    }
+                    FragmentHome.this.departmentModels=departmentModels;
+                    Log.e("kkkk", departmentModels.size() + "");
+                  fragmentHomeMvvm.getProducts(getUserModel());
                     //binding.cardNoData.setVisibility(View.GONE);
                 } else {
-                    index = 0;
                     pos = 0;
                     binding.progBar.setVisibility(View.GONE);
                     binding.nested.setVisibility(View.VISIBLE);
@@ -219,11 +216,10 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
             public void onChanged(List<ProductModel> productModels) {
                 if (productModels != null && productModels.size() > 0) {
                     // Log.e("kkkk", productModels.size() + "");
-                    index = 0;
                     FragmentHome.this.productModels = productModels;
-                    setImageBitmap();
+
+                    fragmentHomeMvvm.getOrders(getUserModel());
                 } else {
-                    index = 0;
                     pos = 0;
                     binding.progBar.setVisibility(View.GONE);
                     binding.nested.setVisibility(View.VISIBLE);
@@ -234,13 +230,33 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
             @Override
             public void onChanged(List<CreateOrderModel> createOrderModels) {
                 if (createOrderModels != null && createOrderModels.size() > 0) {
+                   FragmentHome.this.createOrderModels = createOrderModels;
 
-                    insertOrders(createOrderModels);
+                    try {
+
+                                accessDatabase.insertCategory(departmentModels, FragmentHome.this);
+
+
+
+
+                    } catch (Exception e) {
+
+                    }
+
                 } else {
-                    index = 0;
-                    pos = 0;
-                    binding.progBar.setVisibility(View.GONE);
-                    binding.nested.setVisibility(View.VISIBLE);
+                    try {
+
+                                accessDatabase.insertCategory(departmentModels, FragmentHome.this);
+
+
+
+
+                    } catch (Exception e) {
+
+                    }
+//                    pos = 0;
+//                    binding.progBar.setVisibility(View.GONE);
+//                    binding.nested.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -255,7 +271,11 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
                         } else {
                             pos = 0;
                             try {
-                                accessDatabase.getallOrder(FragmentHome.this);
+
+                                        accessDatabase.getallOrder(FragmentHome.this);
+
+
+
 
                             } catch (Exception e) {
 
@@ -267,7 +287,12 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
                         if (productModel != null) {
                             // Log.e("llll", "llll");
                             try {
-                                accessDatabase.udateProduct(productModelList.get(pos).getId() + "", productModel.getId() + "", FragmentHome.this);
+
+                                        accessDatabase.udateProduct(productModelList.get(pos).getId() + "", productModel.getId() + "", FragmentHome.this);
+
+
+
+
 
                             } catch (Exception e) {
 
@@ -326,17 +351,20 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
         binding.cardNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                index = 0;
                 pos = 0;
-                if (createOrderModels != null) {
-                    createOrderModels.clear();
+                if (createOrderModels1 != null) {
+                    createOrderModels1.clear();
                 }
                 binding.progBar.setVisibility(View.VISIBLE);
                 binding.nested.setVisibility(View.GONE);
                 fragmentHomeMvvm.getSetting(getUserModel());
 
                 try {
-                    accessDatabase.getLocalProduct(FragmentHome.this, "local");
+
+                            accessDatabase.getLocalProduct(FragmentHome.this, "local");
+
+
+
 
                 } catch (Exception e) {
 
@@ -360,7 +388,6 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
             fragmentHomeMvvm.getSetting(getUserModel());
 
         } else {
-            index = 0;
             pos = 0;
             binding.progBar.setVisibility(View.GONE);
             binding.nested.setVisibility(View.VISIBLE);
@@ -382,9 +409,9 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
     }
 
     private void backOrder() {
-        if (pos < createOrderModels.size()) {
-            if (createOrderModels.get(pos).isIs_back()) {
-                fragmentHomeMvvm.backOrder(createOrderModels.get(pos), getUserModel());
+        if (pos < createOrderModels1.size()) {
+            if (createOrderModels1.get(pos).getCreateOrderModel().getLocal1()!=null&&createOrderModels1.get(pos).getCreateOrderModel().isIs_back()&&createOrderModels1.get(pos).getCreateOrderModel().getLocal1().equals("local")) {
+                fragmentHomeMvvm.backOrder(createOrderModels1.get(pos).getCreateOrderModel(), getUserModel());
             } else {
                 pos += 1;
                 backOrder();
@@ -392,19 +419,15 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
         } else {
             pos = 0;
             //createOrderModels.clear();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+
                     accessDatabase.clear(activity);
 
-                }
-            }).start();
+
             fragmentHomeMvvm.getDepartment(getUserModel());
         }
     }
 
     private void insertOrders(List<CreateOrderModel> createOrderModels) {
-        this.createOrderModels = createOrderModels;
         try {
             for (int i = 0; i < createOrderModels.size(); i++) {
                 CreateOrderModel createOrderModel = createOrderModels.get(i);
@@ -412,7 +435,11 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
                 createOrderModels.remove(i);
                 createOrderModels.add(i, createOrderModel);
             }
-            accessDatabase.insertAllOrder(createOrderModels, FragmentHome.this);
+
+                    accessDatabase.insertAllOrder(createOrderModels, FragmentHome.this);
+
+
+
 
         } catch (Exception e) {
 
@@ -433,15 +460,24 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
 
         //Log.e("d;ldldl",bol+"");
         if (bol) {
-            fragmentHomeMvvm.getOrders(getUserModel());
+            pos=0;
+            if(createOrderModels.size()>0){
+            insertOrders(createOrderModels);}
+            else{
+                pos = 0;
+                binding.progBar.setVisibility(View.GONE);
+                binding.nested.setVisibility(View.VISIBLE);
+            }
+
+           // fragmentHomeMvvm.getOrders(getUserModel());
         }
     }
 
     @Override
     public void onCategoryDataInsertedSuccess(Boolean bol) {
         if (bol) {
-            index = 0;
-            fragmentHomeMvvm.getProducts(getUserModel());
+Log.e("oooo",bol+"");
+            setImageBitmap();
         }
     }
 
@@ -451,22 +487,22 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
         try {
 
             Picasso.get()
-                    .load(productModels.get(index).getPhoto())
+                    .load(productModels.get(pos).getPhoto())
                     .into(new Target() {
                         @Override
                         public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
                             /* Save the bitmap or do something with it here */
 
                             //Set it in the ImageView
-                            if (index < productModels.size()) {
-                                ProductModel productModel = productModels.get(index);
+                            if (pos < productModels.size()) {
+                                ProductModel productModel = productModels.get(pos);
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 10, stream);
                                 productModel.setImageBitmap(stream.toByteArray());
-                                productModels.set(index, productModel);
+                                productModels.set(pos, productModel);
                             }
-                            index += 1;
-                            if (index == productModels.size()) {
+                            pos += 1;
+                            if (pos == productModels.size()) {
                                 try {
                                     accessDatabase.insertProduct(productModels, FragmentHome.this);
 
@@ -480,8 +516,8 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
 
                         @Override
                         public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-                            index += 1;
-                            if (index == productModels.size()) {
+                            pos += 1;
+                            if (pos == productModels.size()) {
                                 try {
                                     accessDatabase.insertProduct(productModels, FragmentHome.this);
 
@@ -499,10 +535,14 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
                         }
                     });
         } catch (Exception e) {
-            index += 1;
-            if (index == productModels.size()) {
+            pos += 1;
+            if (pos == productModels.size()) {
                 try {
-                    accessDatabase.insertProduct(productModels, FragmentHome.this);
+
+                            accessDatabase.insertProduct(productModels, FragmentHome.this);
+
+
+
 
                 } catch (Exception exception) {
 
@@ -532,7 +572,11 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
                     itemCartModelList.addAll(list);
                 }
                 try {
-                    accessDatabase.insertOrderProduct(itemCartModelList, this);
+
+                            accessDatabase.insertOrderProduct(itemCartModelList, FragmentHome.this);
+
+
+
 
                 } catch (Exception e) {
 
@@ -548,7 +592,7 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
     public void onProductORderDataInsertedSuccess(Boolean bol) {
         if (bol) {
 //
-            index = 0;
+
             pos = 0;
             binding.progBar.setVisibility(View.GONE);
             binding.nested.setVisibility(View.VISIBLE);
@@ -566,7 +610,10 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
         } else {
             try {
 
-                accessDatabase.getallOrder(this);
+                        accessDatabase.getallOrder(FragmentHome.this);
+
+
+
 
             } catch (Exception e) {
 
@@ -587,7 +634,11 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
 
             //    Log.e("lllll", "kkkkk");
             try {
-                accessDatabase.getallOrder(FragmentHome.this);
+
+                        accessDatabase.getallOrder(FragmentHome.this);
+
+
+
 
             } catch (Exception e) {
 
@@ -597,17 +648,16 @@ public class FragmentHome extends BaseFragment implements DataBaseInterfaces.Pro
     }
 
     @Override
-    public void onAllOrderDataSuccess(List<CreateOrderModel> createOrderModels) {
+    public void onAllOrderDataSuccess(List<OrdersModel> createOrderModels) {
         pos = 0;
-        Toast.makeText(activity, createOrderModels.size() + " " + preferences.getOrdernum(activity), Toast.LENGTH_SHORT).show();
-Log.e("sssdldldl",createOrderModels.size()+"");
+     //   Toast.makeText(activity, createOrderModels.size() + " " + preferences.getOrdernum(activity), Toast.LENGTH_SHORT).show();
         if (createOrderModels.size() >= preferences.getOrdernum(activity)) {
 
-            Toast.makeText(activity, createOrderModels.size() + "", Toast.LENGTH_SHORT).show();
+       //     Toast.makeText(activity, createOrderModels.size() + "", Toast.LENGTH_SHORT).show();
             if (createOrderModels.size() > 0) {
                 preferences.create_ordernum(activity, 0);
 
-                this.createOrderModels=createOrderModels;
+                this.createOrderModels1=createOrderModels;
 
                 try {
                     uploadOrders();
@@ -616,60 +666,63 @@ Log.e("sssdldldl",createOrderModels.size()+"");
                 } catch (Exception e) {
 
                 }
-            } else {
+            }
+            else {
                 preferences.create_ordernum(activity, 0);
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
+
                         accessDatabase.clear(activity);
 
-                    }
-                }).start();
+
 
                 fragmentHomeMvvm.getDepartment(getUserModel());
             }
         } else {
-            accessDatabase.getallOrder(this);
+
+                    accessDatabase.getallOrder(FragmentHome.this);
+
+
         }
     }
 
-    @Override
-    public void onAllOrderProductDataSuccess(List<ItemCartModel> itemCartModelList) {
-
-        Log.e("ddlldl", pos + "");
-        if (itemCartModelList != null && itemCartModelList.size() > 0) {
-            CreateOrderModel createOrderModel = createOrderModels.get(pos);
-            createOrderModel.setDetails(itemCartModelList);
-            createOrderModels.remove(pos);
-            Toast.makeText(activity, itemCartModelList.size() + "", Toast.LENGTH_SHORT).show();
-            createOrderModels.add(pos, createOrderModel);
-            pos += 1;
-        }
-        if (createOrderModels != null && createOrderModels.size() > 0 && pos == createOrderModels.size()) {
-            pos = 0;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    accessDatabase.clear(activity);
-
-                }
-            }).start();
-            uploadOrders();
-        } else {
-            try {
-                accessDatabase.getOrderProduct(this, createOrderModels.get(pos).getId() + "");
-
-            } catch (Exception ignored) {
-
-            }
-        }
-    }
+//    @Override
+//    public void onAllOrderProductDataSuccess(List<ItemCartModel> itemCartModelList) {
+//
+//        Log.e("ddlldl", pos + "");
+//        if (itemCartModelList != null && itemCartModelList.size() > 0) {
+//            CreateOrderModel createOrderModel = createOrderModels.get(pos);
+//            createOrderModel.setDetails(itemCartModelList);
+//            createOrderModels.remove(pos);
+//            Toast.makeText(activity, itemCartModelList.size() + "", Toast.LENGTH_SHORT).show();
+//            createOrderModels.add(pos, createOrderModel);
+//            pos += 1;
+//        }
+//        if (createOrderModels != null && createOrderModels.size() > 0 && pos == createOrderModels.size()) {
+//            pos = 0;
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    accessDatabase.clear(activity);
+//
+//                }
+//            }).start();
+//            uploadOrders();
+//        } else {
+//            try {
+//             //   accessDatabase.getOrderProduct(this, createOrderModels.get(pos).getId() + "");
+//
+//            } catch (Exception ignored) {
+//
+//            }
+//        }
+//    }
 
     private void uploadOrders() {
-        if (pos < createOrderModels.size()) {
-            if (createOrderModels.get(pos).getLocal()) {
-                fragmentHomeMvvm.sendOrder(createOrderModels.get(pos), getUserModel());
+        if (pos < createOrderModels1.size()) {
+            if (createOrderModels1.get(pos).getCreateOrderModel().getLocal()) {
+                CreateOrderModel createOrderModel=createOrderModels1.get(pos).getCreateOrderModel();
+                createOrderModel.setDetails(createOrderModels1.get(pos).getItemCartModelList());
+                fragmentHomeMvvm.sendOrder(createOrderModel, getUserModel());
             } else {
                 pos += 1;
                 uploadOrders();

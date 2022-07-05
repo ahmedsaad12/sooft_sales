@@ -23,7 +23,7 @@ public abstract class LocalDatabase extends RoomDatabase {
     public static LocalDatabase newInstance(Context context) {
         if (instance == null) {
             synchronized (LocalDatabase.class) {
-                instance = Room.databaseBuilder(context.getApplicationContext(), LocalDatabase.class, Tags.DATABASE_NAME)
+                instance = Room.databaseBuilder(context.getApplicationContext(), LocalDatabase.class, Tags.DATABASE_NAME).allowMainThreadQueries()
                         .build();
             }
         }

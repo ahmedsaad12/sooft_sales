@@ -75,6 +75,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
         return send;
     }
+
     public LiveData<SettingDataModel> getSetting() {
         if (settingDataModelMutableLiveData == null) {
             settingDataModelMutableLiveData = new MutableLiveData<>();
@@ -82,6 +83,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
         return settingDataModelMutableLiveData;
     }
+
     public LiveData<Boolean> getBack() {
         if (back == null) {
             back = new MutableLiveData<>();
@@ -137,7 +139,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<DepartmentDataModel> response) {
 
                         if (response.isSuccessful() && response.body() != null) {
-                          //  Log.e("jjj",response.body().getCode()+"");
+                            //  Log.e("jjj",response.body().getCode()+"");
                             if (response.body().getCode() == 200) {
                                 List<DepartmentModel> list = response.body().getData();
                                 if (list.size() > 0) {
@@ -147,8 +149,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
                                 }
 
-                            }
-                            else {
+                            } else {
                                 departmentLivData.setValue(new ArrayList<>());
 
                             }
@@ -157,7 +158,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                       // Log.e(TAG, "onError: ", e);
+                        // Log.e(TAG, "onError: ", e);
                     }
                 });
 
@@ -177,10 +178,10 @@ public class FragmentHomeMvvm extends AndroidViewModel {
                     }
 
                     public void onSuccess(@NonNull Response<ProductDataModel> response) {
-                    //    Log.e("dddd", response.code() + "");
+                        //    Log.e("dddd", response.code() + "");
 
                         if (response.isSuccessful() && response.body() != null) {
-                         //  Log.e("dddd", response.body().getCode() + "");
+                            //  Log.e("dddd", response.body().getCode() + "");
                             if (response.body().getCode() == 200) {
                                 // List<ProductModel> list = response.body().getData();
                                 listMutableLiveData.setValue(response.body().getData());
@@ -190,7 +191,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                      //  Log.e("kkkk", e.toString());
+                        //  Log.e("kkkk", e.toString());
                     }
                 });
     }
@@ -209,10 +210,10 @@ public class FragmentHomeMvvm extends AndroidViewModel {
                     }
 
                     public void onSuccess(@NonNull Response<OrderDataModel> response) {
-                      //  Log.e("dddd", response.code() + "");
+                        //  Log.e("dddd", response.code() + "");
 
                         if (response.isSuccessful() && response.body() != null) {
-                          //  Log.e("dddd", response.body().getCode() + "");
+                            //  Log.e("dddd", response.body().getCode() + "");
                             if (response.body().getCode() == 200) {
                                 // List<ProductModel> list = response.body().getData();
                                 mutableLiveData.setValue(response.body().getData());
@@ -229,14 +230,14 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
     public void sendOrder(CreateOrderModel cartDataModel, UserModel userModel) {
         cartDataModel.setLocal(false);
-
+        cartDataModel.setLocal1(null);
         Gson gson = new Gson();
         String user_data = gson.toJson(cartDataModel);
         Log.e("user", user_data);
-        Toast.makeText(context, user_data, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(context, user_data, Toast.LENGTH_SHORT).show();
         Api.getService(Tags.base_url)
                 .
-                sendOrder(userModel.getData().getAccess_token(), cartDataModel)
+                        sendOrder(userModel.getData().getAccess_token(), cartDataModel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
@@ -248,7 +249,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
                     @Override
                     public void onSuccess(@NonNull Response<StatusResponse> response) {
-                           //Log.e("order",response.code()+"");
+                        //Log.e("order",response.code()+"");
 //                        Log.e("slkdkdkkdk", response.code() + ""+cartDataModel.getLatitude()+" "+cartDataModel.getLongitude()+" "+response.body().getStatus());
                         if (response.isSuccessful() && response.body() != null) {
                             if (response.body().getCode() == 200) {
@@ -262,7 +263,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                      //  Log.e(TAG, "onError: ", e);
+                        //  Log.e(TAG, "onError: ", e);
                     }
                 });
 
@@ -289,8 +290,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
                                 back.postValue(true);
 
-                            }
-                            else{
+                            } else {
                                 back.postValue(true);
 
                             }
@@ -300,7 +300,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                     //   Log.e(TAG, "onError: ", e);
+                        //   Log.e(TAG, "onError: ", e);
                     }
                 });
 
@@ -321,14 +321,14 @@ public class FragmentHomeMvvm extends AndroidViewModel {
             en_part = Common.getRequestBodyText(model.getTitle());
             ar_part = Common.getRequestBodyText(model.getTitle2());
         }
-        RequestBody price=Common.getRequestBodyText(model.getPrice()+"");
+        RequestBody price = Common.getRequestBodyText(model.getPrice() + "");
         RequestBody cat_part = Common.getRequestBodyText(model.getCategory_id() + "");
 
 
-        MultipartBody.Part image = Common.getMultiPart(context, getUriFromBitmap(model.getImageBitmap(),context), "photo");
+        MultipartBody.Part image = Common.getMultiPart(context, getUriFromBitmap(model.getImageBitmap(), context), "photo");
 
 
-        Api.getService(Tags.base_url).addPeoduct(userModel.getData().getAccess_token(), ar_part, en_part, cat_part,price, image).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).unsubscribeOn(Schedulers.io()).subscribe(new SingleObserver<Response<SingleProductDataModel>>() {
+        Api.getService(Tags.base_url).addPeoduct(userModel.getData().getAccess_token(), ar_part, en_part, cat_part, price, image).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).unsubscribeOn(Schedulers.io()).subscribe(new SingleObserver<Response<SingleProductDataModel>>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 disposable.add(d);
@@ -337,7 +337,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
             @Override
             public void onSuccess(@NonNull Response<SingleProductDataModel> singleProductDataModelResponse) {
                 if (singleProductDataModelResponse.isSuccessful()) {
-                   // Log.e("kkkk", singleProductDataModelResponse.body().getCode() + "");
+                    // Log.e("kkkk", singleProductDataModelResponse.body().getCode() + "");
                     if (singleProductDataModelResponse.body().getCode() == 200) {
 
                         productMutableLiveData.postValue(singleProductDataModelResponse.body().getData());
@@ -347,22 +347,22 @@ public class FragmentHomeMvvm extends AndroidViewModel {
 
             @Override
             public void onError(@NonNull Throwable e) {
-             //   Log.e("hhhh", e.toString());
+                //   Log.e("hhhh", e.toString());
             }
         });
 
     }
 
-    private Uri getUriFromBitmap(byte[] endPoint,Context context) {
-      //  Log.e(";;;;",endPoint.length+"");
+    private Uri getUriFromBitmap(byte[] endPoint, Context context) {
+        //  Log.e(";;;;",endPoint.length+"");
         Bitmap bitmap = BitmapFactory.decodeByteArray(endPoint, 0, endPoint.length);
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 10, bytes);
         return Uri.parse(MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "filename", ""));
     }
-    public void getSetting(UserModel userModel) {
 
+    public void getSetting(UserModel userModel) {
 
 
         Api.getService(Tags.base_url)
@@ -391,6 +391,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
                     }
                 });
     }
+
     public LiveData<Boolean> onLogoutSuccess() {
         if (onLogoutSuccess == null) {
             onLogoutSuccess = new MutableLiveData<>();
@@ -403,7 +404,7 @@ public class FragmentHomeMvvm extends AndroidViewModel {
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-        Api.getService(Tags.base_url).logout( userModel.getData().getAccess_token())
+        Api.getService(Tags.base_url).logout(userModel.getData().getAccess_token())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<StatusResponse>>() {
@@ -416,12 +417,12 @@ public class FragmentHomeMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<StatusResponse> statusResponseResponse) {
                         dialog.dismiss();
                         if (statusResponseResponse.isSuccessful()) {
-                          //  Log.e("code", statusResponseResponse.body().getStatus()+"");
+                            //  Log.e("code", statusResponseResponse.body().getStatus()+"");
 
                             if (statusResponseResponse.body().getCode() == 200) {
                                 onLogoutSuccess.setValue(true);
                             }
-                        }else {
+                        } else {
 
                         }
                     }

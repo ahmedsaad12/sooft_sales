@@ -26,6 +26,7 @@ public class CreateOrderModel implements Serializable {
     private boolean is_back;
     private int pay_type;
     private boolean local;
+    private String local1;
     @Ignore
     private List<ItemCartModel> details;
 
@@ -107,5 +108,13 @@ public class CreateOrderModel implements Serializable {
 
     public void setPay_type(int pay_type) {
         this.pay_type = pay_type;
+    }
+
+    public String getLocal1() {
+        return local1;
+    }
+
+    public void setLocal1(String local1) {
+        this.local1 = local1;
     }
 }

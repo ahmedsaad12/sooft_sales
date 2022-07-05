@@ -5,6 +5,7 @@ package com.sooft_sales.local_database;
 import com.sooft_sales.model.CreateOrderModel;
 import com.sooft_sales.model.DepartmentModel;
 import com.sooft_sales.model.ItemCartModel;
+import com.sooft_sales.model.OrdersModel;
 import com.sooft_sales.model.ProductModel;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class DataBaseInterfaces {
         void onProductUpdateDataSuccess();
     }
     public interface AllOrderInterface {
-        void onAllOrderDataSuccess(List<CreateOrderModel> createOrderModels);
+        void onAllOrderDataSuccess(List<OrdersModel> createOrderModels);
     }
     public interface AllOrderProductInterface {
         void onAllOrderProductDataSuccess(List<ItemCartModel> itemCartModelList);

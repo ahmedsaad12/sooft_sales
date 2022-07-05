@@ -101,6 +101,9 @@ public class LoginActivity extends BaseActivity {
         });
 
         model = new LoginModel();
+        if(preferences.getbasurl(this)!=null){
+            model.setUrl(preferences.getbasurl(this));
+        }
         binding.setModel(model);
         model.setLang(getLang());
         if (getLang().equals("ar")) {

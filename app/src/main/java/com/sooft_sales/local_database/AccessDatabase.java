@@ -8,6 +8,7 @@ import android.util.Log;
 import com.sooft_sales.model.CreateOrderModel;
 import com.sooft_sales.model.DepartmentModel;
 import com.sooft_sales.model.ItemCartModel;
+import com.sooft_sales.model.OrdersModel;
 import com.sooft_sales.model.ProductModel;
 import com.sooft_sales.tags.Tags;
 
@@ -23,20 +24,25 @@ public class AccessDatabase {
     }
 
     public void clear(Context context) {
+ AsyncTask.execute(new Runnable() {
+     @Override
+     public void run() {
+         localDatabase.clearAllTables();
+         // localDatabase.close();
+         localDatabase.getOpenHelper().getReadableDatabase().query("PRAGMA wal_checkpoint(FULL)").close();
 
-        localDatabase.clearAllTables();
-        // localDatabase.close();
-        localDatabase.getOpenHelper().getReadableDatabase().query("PRAGMA wal_checkpoint(FULL)").close();
+         if (!localDatabase.inTransaction()) {
+             localDatabase.getOpenHelper().getReadableDatabase().execSQL("VACUUM");
+         }
+         //  localDatabase.close();
 
-        if (!localDatabase.inTransaction()) {
-            localDatabase.getOpenHelper().getReadableDatabase().execSQL("VACUUM");
-        }
-      //  localDatabase.close();
+         context.deleteDatabase(Tags.DATABASE_NAME);
+         if (!localDatabase.isOpen()) {
+             localDatabase.getOpenHelper().getWritableDatabase();
+         }
 
-        context.deleteDatabase(Tags.DATABASE_NAME);
-        if (!localDatabase.isOpen()) {
-            localDatabase.getOpenHelper().getWritableDatabase();
-        }
+     }
+ });
 
 
     }
@@ -103,9 +109,9 @@ public class AccessDatabase {
         new AllOrderTask(productInterface).execute();
     }
 
-    public void getOrderProduct(DataBaseInterfaces.AllOrderProductInterface productInterface, String id) {
-        new ProductOrders(productInterface).execute(id);
-    }
+//    public void getOrderProduct(DataBaseInterfaces.AllOrderProductInterface productInterface, String id) {
+//        new ProductOrders(productInterface).execute(id);
+//    }
 
     public class InsertCategoryTask extends AsyncTask<List<DepartmentModel>, Void, Boolean> {
         private DataBaseInterfaces.CategoryInsertInterface retrieveInsertInterface;
@@ -391,7 +397,7 @@ public class AccessDatabase {
 
         @Override
         protected Long doInBackground(String... retrieveModels) {
-            long data = daoInterface.updateOrder(Double.parseDouble(retrieveModels[0]), true);
+            long data = daoInterface.updateOrder(Double.parseDouble(retrieveModels[0]), true,"local");
 
             return data;
         }
@@ -427,7 +433,7 @@ public class AccessDatabase {
         }
     }
 
-    public class AllOrderTask extends AsyncTask<String, Void, List<CreateOrderModel>> {
+    public class AllOrderTask extends AsyncTask<String, Void, List<OrdersModel>> {
         private DataBaseInterfaces.AllOrderInterface allOrderInterface;
 
         public AllOrderTask(DataBaseInterfaces.AllOrderInterface allOrderInterface) {
@@ -435,42 +441,42 @@ public class AccessDatabase {
         }
 
         @Override
-        protected List<CreateOrderModel> doInBackground(String... strings) {
+        protected List<OrdersModel> doInBackground(String... strings) {
 
 
-            return daoInterface.getallOrders(true, true);
+            return daoInterface.getallOrders(true, true,"local");
 
         }
 
         @Override
-        protected void onPostExecute(List<CreateOrderModel> productModelList) {
+        protected void onPostExecute(List<OrdersModel> productModelList) {
 
             allOrderInterface.onAllOrderDataSuccess(productModelList);
         }
 
     }
 
-    public class ProductOrders extends AsyncTask<String, Void, List<ItemCartModel>> {
-        private DataBaseInterfaces.AllOrderProductInterface productInterface;
-
-        public ProductOrders(DataBaseInterfaces.AllOrderProductInterface productInterface) {
-            this.productInterface = productInterface;
-        }
-
-        @Override
-        protected List<ItemCartModel> doInBackground(String... strings) {
-
-
-            return daoInterface.getOrderProducts(Double.parseDouble(strings[0]));
-
-        }
-
-        @Override
-        protected void onPostExecute(List<ItemCartModel> productModelList) {
-
-            productInterface.onAllOrderProductDataSuccess(productModelList);
-        }
-
-    }
+//    public class ProductOrders extends AsyncTask<String, Void, List<ItemCartModel>> {
+//        private DataBaseInterfaces.AllOrderProductInterface productInterface;
+//
+//        public ProductOrders(DataBaseInterfaces.AllOrderProductInterface productInterface) {
+//            this.productInterface = productInterface;
+//        }
+//
+//        @Override
+//        protected List<ItemCartModel> doInBackground(String... strings) {
+//
+//
+//            return daoInterface.getOrderProducts(Double.parseDouble(strings[0]));
+//
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<ItemCartModel> productModelList) {
+//
+//            productInterface.onAllOrderProductDataSuccess(productModelList);
+//        }
+//
+//    }
 
 }
